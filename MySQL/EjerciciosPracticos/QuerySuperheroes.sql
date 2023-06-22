@@ -1,0 +1,10 @@
+INSERT INTO creador (nombre) VALUES ('Marvel');
+INSERT INTO creador (nombre) VALUES ('DC Comics');
+SELECT * FROM creador;
+DELETE FROM creador where id_creador =1;
+DELETE FROM creador where id_creador =2;
+SELECT * FROM creador;
+INSERT INTO creador (nombre) VALUES ('Marvel'), ('DC Comics');
+DELETE FROM creador where id_creador =3;
+DELETE FROM creador where id_creador =4;
+SELECT * FROM creador;

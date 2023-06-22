@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Multi-file class diagram">
+  <ClassDiagramComponents>
+    <Class name="PerroService" package="E1AdopcionPerrosService" visibility="public" xPosition="31.0" yPosition="370.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="crearPerros" returnType="ArrayList&lt;Perro&gt;" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="PersonaService" package="E1AdopcionPerrosService" visibility="public" xPosition="296.0" yPosition="118.0">
+      <Fields>
+        <Field name="leer" type="Scanner" visibility="package"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="crearPersonas" returnType="ArrayList&lt;Persona&gt;" visibility="public"/>
+        <Method name="adoptandoPerrito" returnType="ArrayList&lt;Persona&gt;" visibility="public">
+          <Argument type="ArrayList&lt;Persona&gt;" name="personas"/>
+          <Argument type="ArrayList&lt;Perro&gt;" name="perritos"/>
+        </Method>
+        <Method name="imprimir" returnType="void" visibility="public">
+          <Argument type="ArrayList&lt;Persona&gt;" name="personas"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="AdopcionMain" package="E1AdopcionPerro" visibility="public" xPosition="13.0" yPosition="26.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Perro" package="E1AdopcionPerro" visibility="public" xPosition="367.0" yPosition="298.0">
+      <Fields>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="raza" type="String" visibility="private"/>
+        <Field name="edad" type="double" visibility="private"/>
+        <Field name="tamanio" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="raza"/>
+          <Argument type="double" name="edad"/>
+          <Argument type="String" name="tamanio"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="getRaza" returnType="String" visibility="public"/>
+        <Method name="setRaza" returnType="void" visibility="public">
+          <Argument type="String" name="raza"/>
+        </Method>
+        <Method name="getEdad" returnType="double" visibility="public"/>
+        <Method name="setEdad" returnType="void" visibility="public">
+          <Argument type="double" name="edad"/>
+        </Method>
+        <Method name="getTamanio" returnType="String" visibility="public"/>
+        <Method name="setTamanio" returnType="void" visibility="public">
+          <Argument type="String" name="tamanio"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Persona" package="E1AdopcionPerro" visibility="public" xPosition="952.0" yPosition="152.0">
+      <Fields>
+        <Field name="nombreP" type="String" visibility="private"/>
+        <Field name="apellido" type="String" visibility="private"/>
+        <Field name="edadP" type="int" visibility="private"/>
+        <Field name="documento" type="long" visibility="private"/>
+        <Field name="perro" type="Perro" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="nombreP"/>
+          <Argument type="String" name="apellido"/>
+          <Argument type="int" name="edadP"/>
+          <Argument type="long" name="documento"/>
+          <Argument type="Perro" name="perro"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getNombreP" returnType="String" visibility="public"/>
+        <Method name="setNombreP" returnType="void" visibility="public">
+          <Argument type="String" name="nombreP"/>
+        </Method>
+        <Method name="getApellido" returnType="String" visibility="public"/>
+        <Method name="setApellido" returnType="void" visibility="public">
+          <Argument type="String" name="apellido"/>
+        </Method>
+        <Method name="getEdadP" returnType="int" visibility="public"/>
+        <Method name="setEdadP" returnType="void" visibility="public">
+          <Argument type="int" name="edadP"/>
+        </Method>
+        <Method name="getDocumento" returnType="long" visibility="public"/>
+        <Method name="setDocumento" returnType="void" visibility="public">
+          <Argument type="long" name="documento"/>
+        </Method>
+        <Method name="getPerro" returnType="Perro" visibility="public"/>
+        <Method name="setPerro" returnType="void" visibility="public">
+          <Argument type="Perro" name="perro"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <UseRelation source="E1AdopcionPerrosService.PersonaService" target="E1AdopcionPerro.Persona" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="perro" source="E1AdopcionPerro.Persona" target="E1AdopcionPerro.Perro" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="E1AdopcionPerrosService.PerroService" target="E1AdopcionPerro.Perro" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="E1AdopcionPerro.Persona" target="E1AdopcionPerro.Perro" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

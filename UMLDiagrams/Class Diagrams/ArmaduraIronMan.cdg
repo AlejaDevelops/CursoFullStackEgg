@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="ArmaduraIronMan">
+  <ClassDiagramComponents>
+    <Class name="Jarvis" package="" visibility="public" xPosition="33.0" yPosition="756.0">
+      <Fields>
+        <Field name="radar" type="ArrayList&lt;Enemigo&gt;" visibility="private"/>
+        <Field name="ironman" type="ArmaduraIronMan" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="mostrarInfoArmaduraYPartes" returnType="void" visibility="public"/>
+        <Method name="mostrarEstadoBateria" returnType="void" visibility="public"/>
+        <Method name="mostrarEstadoReactor" returnType="void" visibility="public"/>
+        <Method name="revisarDispositivos" returnType="void" visibility="public"/>
+        <Method name="repararDanios" returnType="void" visibility="public"/>
+        <Method name="crearObjetos" returnType="ArrayList&lt;Enemigo&gt;" visibility="public"/>
+        <Method name="calcularYMostrarDistanciaObjetos" returnType="void" visibility="public">
+          <Argument type="ArrayList&lt;Enemigo&gt;" name="radar"/>
+        </Method>
+        <Method name="destruirEnemigos" returnType="void" visibility="public">
+          <Argument type="ArrayList&lt;Enemigo&gt;" name="radar"/>
+        </Method>
+        <Method name="accionEvasiva" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="ArmaduraIronMan" package="" visibility="public" xPosition="556.0" yPosition="517.0">
+      <Fields>
+        <Field name="colorPrimario" type="String" visibility="private"/>
+        <Field name="colorSecundario" type="String" visibility="private"/>
+        <Field name="nivelBateria" type="float" visibility="private"/>
+        <Field name="reactor" type="float" visibility="private"/>
+        <Field name="nivelSalud" type="int" visibility="private"/>
+        <Field name="partes" type="ArrayList&lt;PasteArmadura&gt;" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="caminar" returnType="void" visibility="public"/>
+        <Method name="correr" returnType="void" visibility="public"/>
+        <Method name="propulsar" returnType="void" visibility="public"/>
+        <Method name="volar" returnType="void" visibility="public"/>
+        <Method name="escribir" returnType="void" visibility="public"/>
+        <Method name="leer" returnType="void" visibility="public"/>
+        <Method name="disparar" returnType="void" visibility="public"/>
+        <Method name="hablar" returnType="void" visibility="public"/>
+        <Method name="menu" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+    <Enum name="ListaPartes" package="" visibility="public" xPosition="1143.0" yPosition="567.0">
+      <Literals>
+        <Literal name="BOTAS"/>
+        <Literal name="GUANTE_IZQ"/>
+        <Literal name="GUANTE_DER"/>
+        <Literal name="SINTETIZADOR"/>
+        <Literal name="CONSOLA"/>
+      </Literals>
+    </Enum>
+    <Class name="ParteArmadura" package="" visibility="public" xPosition="896.0" yPosition="567.0">
+      <Fields>
+        <Field name="consumoBateria" type="int" visibility="private"/>
+        <Field name="estaDaniado" type="boolean" visibility="private"/>
+        <Field name="nombre" type="ListaPartes" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Class name="Guerrero" package="" visibility="public" xPosition="203.0" yPosition="283.0">
+      <Fields>
+        <Field name="posicion" type="Posicion" visibility="private"/>
+        <Field name="nivelDeResistencia" type="Materiales" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="crearGuerrero" returnType="Guerrero" visibility="public" isAbstract="true"/>
+      </Methods>
+    </Class>
+    <Class name="Posicion" package="" visibility="public" xPosition="375.0" yPosition="15.0">
+      <Fields>
+        <Field name="x" type="int" visibility="private"/>
+        <Field name="y" type="int" visibility="private"/>
+        <Field name="z" type="int" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+    <Enum name="Materiales" package="" visibility="public" xPosition="35.0" yPosition="39.0">
+      <Literals>
+        <Literal name="MATERIAL_A(&quot;Aluminio endurecido&quot;, 52)"/>
+        <Literal name="MATERIAL_B(&quot;Hierro colado&quot;, 10)"/>
+        <Literal name="MATERIAL_C(&quot;Bronce&quot;, 60)"/>
+        <Literal name="MATERIAL_D(&quot;Acero&quot;, 85)"/>
+        <Literal name="MATERIAL_E(&quot;Titanio de alta pureza&quot;, 95)"/>
+      </Literals>
+    </Enum>
+    <Class name="Enemigo" package="" visibility="public" xPosition="152.0" yPosition="517.0">
+      <Fields>
+        <Field name="esHostil" type="boolean" visibility="private"/>
+        <Field name="distancia" type="double" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods/>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <IsRelation name="is" source="Enemigo" target="Guerrero"/>
+    <HasRelation name="tiene" source="Jarvis" target="Enemigo" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <UseRelation name="usa" source="Guerrero" target="Materiales" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="ArmaduraIronMan" target="Guerrero"/>
+    <HasRelation name="tiene" source="Jarvis" target="ArmaduraIronMan" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="tiene" source="Guerrero" target="Posicion" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..1"/>
+    <HasRelation name="tiene" source="ArmaduraIronMan" target="ParteArmadura" type="Aggregation" sourceCardinality="0..1" targetCardinality="1..*" collectionType="List"/>
+    <UseRelation name="usa" source="ParteArmadura" target="ListaPartes" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

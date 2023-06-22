@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Multi-file class diagram">
+  <ClassDiagramComponents>
+    <Class name="Cine" package="E4SalaDeCine" visibility="public" xPosition="17.0" yPosition="9.0">
+      <Fields>
+        <Field name="film" type="Pelicula" visibility="private"/>
+        <Field name="movieTicketCost" type="double" visibility="private"/>
+        <Field name="audience" type="String[][]" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="Pelicula" name="film"/>
+          <Argument type="double" name="movieTicketCost"/>
+          <Argument type="String[][]" name="audience"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getFilm" returnType="Pelicula" visibility="public"/>
+        <Method name="setFilm" returnType="void" visibility="public">
+          <Argument type="Pelicula" name="film"/>
+        </Method>
+        <Method name="getMovieTicketCost" returnType="double" visibility="public"/>
+        <Method name="setMovieTicketCost" returnType="void" visibility="public">
+          <Argument type="double" name="movieTicketCost"/>
+        </Method>
+        <Method name="getAudience" returnType="String[][]" visibility="public"/>
+        <Method name="setAudience" returnType="void" visibility="public">
+          <Argument type="String[][]" name="audience"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Espectador" package="E4SalaDeCine" visibility="public" xPosition="17.0" yPosition="341.0">
+      <Fields>
+        <Field name="name" type="String" visibility="private"/>
+        <Field name="age" type="int" visibility="private"/>
+        <Field name="money" type="double" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="name"/>
+          <Argument type="int" name="age"/>
+          <Argument type="double" name="money"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getName" returnType="String" visibility="public"/>
+        <Method name="setName" returnType="void" visibility="public">
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="getAge" returnType="int" visibility="public"/>
+        <Method name="setAge" returnType="void" visibility="public">
+          <Argument type="int" name="age"/>
+        </Method>
+        <Method name="getMoney" returnType="double" visibility="public"/>
+        <Method name="setMoney" returnType="void" visibility="public">
+          <Argument type="double" name="money"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Pelicula" package="E4SalaDeCine" visibility="public" xPosition="572.0" yPosition="190.0">
+      <Fields>
+        <Field name="filmName" type="String" visibility="private"/>
+        <Field name="filmLength" type="double" visibility="private"/>
+        <Field name="minAge" type="int" visibility="private"/>
+        <Field name="director" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="filmName"/>
+          <Argument type="double" name="filmLength"/>
+          <Argument type="int" name="minAge"/>
+          <Argument type="String" name="director"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getFilmName" returnType="String" visibility="public"/>
+        <Method name="setFilmName" returnType="void" visibility="public">
+          <Argument type="String" name="filmName"/>
+        </Method>
+        <Method name="getFilmLength" returnType="double" visibility="public"/>
+        <Method name="setFilmLength" returnType="void" visibility="public">
+          <Argument type="double" name="filmLength"/>
+        </Method>
+        <Method name="getMinAge" returnType="int" visibility="public"/>
+        <Method name="setMinAge" returnType="void" visibility="public">
+          <Argument type="int" name="minAge"/>
+        </Method>
+        <Method name="getDirector" returnType="String" visibility="public"/>
+        <Method name="setDirector" returnType="void" visibility="public">
+          <Argument type="String" name="director"/>
+        </Method>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="SalaDeCineMain" package="E4SalaDeCine" visibility="public" xPosition="1044.0" yPosition="3.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="CineService" package="E4SalaDeCineService" visibility="public" xPosition="572.0" yPosition="1.0">
+      <Fields>
+        <Field name="leer" type="Scanner" visibility="package"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="crearFuncion" returnType="Cine" visibility="public"/>
+        <Method name="imprimirSala" returnType="boolean" visibility="public">
+          <Argument type="String[][]" name="matrizSala"/>
+        </Method>
+        <Method name="asignarAsiento" returnType="String[][]" visibility="public">
+          <Argument type="String[][]" name="matrizSala"/>
+        </Method>
+        <Method name="llenarSala" returnType="void" visibility="public">
+          <Argument type="Cine" name="funcion"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="EspectadorService" package="E4SalaDeCineService" visibility="public" xPosition="349.0" yPosition="620.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="crearEspectadores" returnType="ArrayList&lt;Espectador&gt;" visibility="public"/>
+        <Method name="crearNombresRandom" returnType="String" visibility="public">
+          <Argument type="Random" name="r"/>
+        </Method>
+        <Method name="printArray" returnType="void" visibility="public">
+          <Argument type="ArrayList&lt;Espectador&gt;" name="a"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="PeliculaService" package="E4SalaDeCineService" visibility="public" xPosition="1099.0" yPosition="323.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="crearPeliculas" returnType="ArrayList&lt;Pelicula&gt;" visibility="public"/>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <UseRelation source="E4SalaDeCine.Cine" target="E4SalaDeCine.Pelicula" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="E4SalaDeCineService.CineService" target="E4SalaDeCine.Cine" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="E4SalaDeCineService.EspectadorService" target="E4SalaDeCine.Espectador" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="film" source="E4SalaDeCine.Cine" target="E4SalaDeCine.Pelicula" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="E4SalaDeCineService.PeliculaService" target="E4SalaDeCine.Pelicula" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
