@@ -1,5 +1,5 @@
 #creamos la base de datos
-CREATE DATABASE IF NOT EXISTS nba;
+CREATE DATABASE IF NOT EXISTS nba; 
 
 #seleccionar la base de datos
 USE nba;

@@ -18,7 +18,7 @@ CREATE TABLE personajes (
   poder INT(11) NOT NULL,
   aparicion INT(11) NOT NULL,
   ocupacion VARCHAR(30) NULL,
-  id_creador INT UNSIGNED NOT NULL,
-  FOREIGN KEY (id_creador) REFERENCES creador(id_creador)
+  id_creadorFK INT UNSIGNED NOT NULL,
+  FOREIGN KEY (id_creadorFK) REFERENCES creador(id_creador)
   );
 
