@@ -108,4 +108,9 @@ select codigo from fabricante where nombre = "Lenovo";
 select count(nombre) from producto where codigo_fabricante = (select codigo from fabricante where nombre = "Lenovo");
 select count(nombre) from producto group by codigo_fabricante;
 
-select nombre from fabricante 
+select codigo_fabricante from producto group by codigo_fabricante;
+select codigo_fabricante from producto group by codigo_fabricante having count(nombre) = (select count(nombre) from producto where codigo_fabricante = (select codigo from fabricante where nombre = "Seagate")) ;
+
+select nombre from fabricante where codigo in (select codigo_fabricante from producto group by codigo_fabricante having count(nombre) = (select count(nombre) from producto where codigo_fabricante = (select codigo from fabricante where nombre = "Lenovo")));
+
+
