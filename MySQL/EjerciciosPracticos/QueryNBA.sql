@@ -36,6 +36,44 @@ select jugador, format(sum(Puntos_por_partido), 2) as Puntos_Totales from estadi
 select Nombre_equipo, count(*) as Cantidad_Jugadores from jugadores group by nombre_equipo;
 
 -- 12. Mostrar el jugador que más puntos ha realizado en toda su carrera.
+SELECT jugador, SUM(Puntos_por_partido) as PuntosTotales FROM estadisticas GROUP BY jugador; -- Lista de los puntos totales de cada jugado
+SELECT MAX(PuntosTotales) FROM (SELECT jugador, SUM(Puntos_por_partido) as PuntosTotales FROM estadisticas GROUP BY jugador)AS PuntosPorJugador; -- Puntaje máximo de la búsqueda anterior
+
 SELECT jugador, FORMAT(SUM(Puntos_por_partido), 2) AS Puntos_Totales FROM estadisticas GROUP BY jugador HAVING SUM(Puntos_por_partido) = (
-    SELECT MAX(PuntosTotales) FROM (SELECT jugador, SUM(Puntos_por_partido) as PuntosTotales FROM estadisticas GROUP BY jugador)AS PuntosPorJugador
-);
+    SELECT MAX(PuntosTotales) FROM (SELECT jugador, SUM(Puntos_por_partido) as PuntosTotales FROM estadisticas GROUP BY jugador)AS PuntosPorJugador);
+
+-- 13. Mostrar el nombre del equipo, conferencia y división del jugador más alto de la NBA.
+Select Nombre_equipo from jugadores where Altura = (Select max(Altura)from jugadores);
+Select nombre, conferencia, division from equipos where Nombre = (Select Nombre_equipo from jugadores where Altura = (Select max(Altura)from jugadores));
+
+-- 14. Mostrar la media de puntos en partidos de los equipos de la división Pacific. (Asumiendo que ambos equipos deben ser de la division Pacific y que la media de puntos de cada partido es la suma de todos los puntos entre 2)
+Select equipo_local, equipo_visitante, (puntos_local + puntos_visitante)/2  as MediaDePuntosPorPartido from partidos; -- Cálculo de la media de puntos por partido
+
+select equipo_local, equipo_visitante, (puntos_local + puntos_visitante)/2  as MediaDePuntosPorPartidoDeEquiposDivisionPacific from partidos 
+	join equipos AS locales on partidos.equipo_local = locales.Nombre  -- Se une la tabla partidos con la tabla equipos para buscar solo los equipos locales
+	join equipos As visitantes on partidos.equipo_visitante = visitantes.Nombre -- Se une la tabla partidos con la tabla equipos nuevamente, pero esta vez para buscar los equipos visitantes 
+	where locales.Division = "Pacific" and visitantes.Division = "Pacific";
+
+-- Mostrando la media total de los partidos...
+select avg((puntos_local + puntos_visitante)/2)  as MediaDePuntosPartidosDivisionPacific from partidos 
+	join equipos AS locales on partidos.equipo_local = locales.Nombre  -- Se une la tabla partidos con la tabla equipos para buscar solo los equipos locales
+	join equipos As visitantes on partidos.equipo_visitante = visitantes.Nombre -- Se une la tabla partidos con la tabla equipos nuevamente, pero esta vez para buscar los equipos visitantes 
+	where locales.Division = "Pacific" and visitantes.Division = "Pacific";
+
+-- 15. Mostrar el partido o partidos (equipo_local, equipo_visitante y diferencia) con mayor diferencia de puntos.
+SELECT equipo_local, equipo_visitante, ABS(puntos_local - puntos_visitante) AS DiferenciaPuntos FROM partidos ORDER BY DiferenciaPuntos DESC LIMIT 1; -- En caso de que solo exista un equipo con la diferencia máxima
+
+Select equipo_local, equipo_visitante, DiferenciaPuntos from -- En caso de que existan varios equipos con la máxima diferencia
+	(Select equipo_local, equipo_visitante, abs(puntos_local-puntos_visitante) As DiferenciaPuntos from partidos) As subconsulta	
+		where DiferenciaPuntos = (Select Max(abs(puntos_local-puntos_visitante)) from partidos);        
+
+-- 16. Mostrar la media de puntos en partidos de los equipos de la división Pacific.
+-- ¿Es el mismo punto 14?
+
+-- 17. Mostrar los puntos de cada equipo en los partidos, tanto de local como de visitante. (Se mostrarán los equipos con la suma de los puntos )
+select sum(puntos_local)  FROM PARTIDOS group by equipo_local;
+select sum(puntos_visitante) FROM PARTIDOS group by equipo_visitante;
+
+select equipos.nombre, PuntosComoLocal.puntos as PuntosComoLocal, PuntosComoVisitante.puntos as PuntosComoVisitante from equipos
+	LEFT JOIN (SELECT equipo_local, SUM(puntos_local) AS Puntos FROM partidos GROUP BY equipo_local) AS PuntosComoLocal ON PuntosComoLocal.equipo_local = equipos.nombre
+	LEFT JOIN (SELECT equipo_visitante, SUM(puntos_visitante) AS Puntos FROM partidos GROUP BY equipo_visitante) AS PuntosComoVisitante ON PuntosComoVisitante.equipo_visitante = equipos.nombre;
