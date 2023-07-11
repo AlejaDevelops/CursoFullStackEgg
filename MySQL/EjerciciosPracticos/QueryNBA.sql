@@ -77,3 +77,42 @@ select sum(puntos_visitante) FROM PARTIDOS group by equipo_visitante;
 select equipos.nombre, PuntosComoLocal.puntos as PuntosComoLocal, PuntosComoVisitante.puntos as PuntosComoVisitante from equipos
 	LEFT JOIN (SELECT equipo_local, SUM(puntos_local) AS Puntos FROM partidos GROUP BY equipo_local) AS PuntosComoLocal ON PuntosComoLocal.equipo_local = equipos.nombre
 	LEFT JOIN (SELECT equipo_visitante, SUM(puntos_visitante) AS Puntos FROM partidos GROUP BY equipo_visitante) AS PuntosComoVisitante ON PuntosComoVisitante.equipo_visitante = equipos.nombre;
+    
+-- 18. Mostrar quien gana en cada partido (codigo, equipo_local, equipo_visitante, equipo_ganador), en caso de empate sera null.
+select *, 
+	CASE 
+		WHEN puntos_local > puntos_visitante THEN equipo_local
+        WHEN puntos_local < puntos_visitante THEN equipo_visitante  
+        else 'Empate'
+        end As EquipoGanador
+	from partidos; 
+
+-- CANDADO A / Posicion 2 / Clave 14043
+select * from estadisticas where Asistencias_por_partido = (select max(Asistencias_por_partido) from estadisticas); 
+
+Select sum(Peso) from jugadores 
+	INNER JOIN equipos on equipos.Nombre = jugadores.Nombre_equipo
+    where equipos.Conferencia like 'East' and jugadores.Posicion like '%C%';
+
+-- CANDADO B / Posicion 3 / Clave 3480
+select count(jugador) from estadisticas 
+    where Asistencias_por_partido > (Select count(*) from jugadores where Nombre_equipo like 'Heat');
+    
+select count(*) from partidos where temporada like '%99%';
+
+-- CANDADO C / Posicion 1 / Clave 631
+select count(*)/(select count(*) from jugadores where Peso >= 195)+0.9945 from jugadores where Procedencia like '%Michigan%' and Nombre_equipo in (select Nombre from equipos where conferencia like 'West');
+select count(*) from jugadores where Peso >= 195;
+
+select avg(Puntos_por_partido)+count(Asistencias_por_partido)+sum(Tapones_por_partido) from estadisticas 
+	inner join jugadores on jugadores.codigo = estadisticas.jugador
+	inner join equipos on equipos.Nombre = jugadores.Nombre_equipo
+    where Division like 'Central';
+ 
+
+
+-- CANDADO D / Posicion 4 / Clave 191
+select Tapones_por_partido from estadisticas where jugador = (select codigo from jugadores where Nombre like 'Corey Maggette') and temporada like '00/01';
+select sum(Puntos_por_partido) from estadisticas where jugador in (select codigo from jugadores where Procedencia like 'Argentina');
+
+
