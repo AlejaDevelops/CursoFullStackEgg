@@ -42,7 +42,7 @@ public class Fabricantes {
 
     @Override
     public String toString() {
-        return "Fabricantes{" + "codigo=" + codigo + ", nombre=" + nombre + '}';
+        return "Fabricante{" + "Código: " + codigo + ", Nombre: " + nombre + '}';
     }
     
     

@@ -52,7 +52,9 @@ h) Editar un producto con datos a elección.
 
 package Tienda;
 
-import Tienda.servicios.ProductoServicio;
+import Tienda.servicios.TiendaServicios;
+
+
 
 /**
  *
@@ -61,19 +63,16 @@ import Tienda.servicios.ProductoServicio;
 public class Tienda {
 
     /**
-     * @param args the command line arguments
+     * PENDIENTE MEJORAR MANEJO DE LAS EXCEPCIONES
      */
     public static void main(String[] args) throws Exception {
-        ProductoServicio ps = new ProductoServicio();
-        ps.menu();
+        TiendaServicios ts = new TiendaServicios();
+        ts.menu();
         
+
         
     }
 
 }
 
-//double n = 2.4;
-        //System.out.println(n);
-        //System.out.println("ingresa un double");
-        //Scanner leer = new Scanner(System.in).useDelimiter("\n");
-        //n = leer.nextDouble(); //SOLO ADMITE POR CONSOLA NUMEROS SEPARADOS POR COMA
+

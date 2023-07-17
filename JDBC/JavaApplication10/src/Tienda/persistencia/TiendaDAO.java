@@ -1,3 +1,8 @@
+/*
+  * METODOS DE LA CLASE PADRE QUE PERMITEN ACCEDER Y MANIPULAR LA BASE DE DATOS
+*/
+
+
 package Tienda.persistencia;
 
 import java.sql.Connection;
@@ -26,7 +31,7 @@ public abstract class TiendaDAO {
     protected void conectarBase() throws ClassNotFoundException, SQLException {
         try {
             Class.forName(DRIVER);
-            String urlBaseDeDatos = "jdbc:mysql://localhost:3306/mysql" + DATABASE + "?useSSL=false";
+            String urlBaseDeDatos = "jdbc:mysql://localhost:3306/" + DATABASE + "?useSSL=false";
             conexion = DriverManager.getConnection(urlBaseDeDatos, USER, PASSWORD);
         } catch (ClassNotFoundException | SQLException ex) {
             throw ex;
@@ -45,7 +50,7 @@ public abstract class TiendaDAO {
             if (conexion != null) {
                 conexion.close();
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw e;
         }
     }
@@ -69,7 +74,7 @@ public abstract class TiendaDAO {
             conectarBase();
             sentencia = conexion.createStatement();
             resultado = sentencia.executeQuery(sql);
-        } catch (Exception ex) {
+        } catch (SQLException | ClassNotFoundException ex) {
             throw ex;
         }
     }
