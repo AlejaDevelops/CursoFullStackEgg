@@ -28,13 +28,14 @@ public class AutorService {
     public Autor registrarDatos(){               
         System.out.println("*** Registro de un autor ***");
         System.out.println("Ingrese el nombre del autor");
-        autor.setNombre(leer.next());
+        autor.setNombre(leer.next()); //validar que el autor no esté registrado en la BD
         autor.setAlta(Boolean.TRUE); 
         return autor;
     }
     
     public Autor crearAutor() throws Exception{
         autor = registrarDatos();
+        // CREAR VERIFICACION DEL AUTOR EN LA BD
         ajc.create(autor);
         System.out.println("Autor registrado exitosamente");
         return autor;
@@ -43,7 +44,7 @@ public class AutorService {
     public void eliminaAutor() {
         try {
             System.out.println("Estos son los autores registrados en la base de datos: ");
-            //listar autores registrados en la BD
+            System.out.println(traerListaAutores().toString());
             System.out.println("Ingresa el ID del autor que deseas eliminar");
             int idEliminar = leer.nextInt();
             ajc.destroy(idEliminar);

@@ -24,7 +24,7 @@ public class LibroService {
 
     LibroJpaController ljc = new LibroJpaController();
     AutorService as = new AutorService();
-    EditorialService es = new EditorialService(); 
+    EditorialService es = new EditorialService();
     Scanner leer = new Scanner(System.in).useDelimiter("\n");
 
     public Libro registrarDatos() throws Exception {
@@ -41,37 +41,44 @@ public class LibroService {
         System.out.println("Ejemplares restantes");
         libro.setEjemplaresRestantes(leer.nextInt());
         libro.setAlta(Boolean.TRUE);
-        
+
+        //SETEO DEL AUTOR
         System.out.println("Nombre completo del Autor");
         String nombreAutorBuscado = leer.next();
-        
-        ArrayList<Autor> listaAutores = as.traerAutorPorNombre();  //Carga todos los autores de la BD        
-        
-        for (Autor aux : listaAutores) { //OJO CON ERRORES POR REVISAR
+        ArrayList<Autor> listaAutores = as.traerListaAutores();  //Carga todos los autores de la BD 
+        boolean flag = true;
+        for (Autor aux : listaAutores) { 
             // Autor existe en la BD
             if (nombreAutorBuscado.equalsIgnoreCase(aux.getNombre())) {
                 libro.setAutor(aux);
-            } else{
-                //Autor no existe en la BD
-            libro.setAutor(as.crearAutor());
+                flag = false;
+                break;
             }
-            
         }
+        if (flag == true) { //Autor no existe en la BD                
+            System.out.println("Autor no existe en la base de datos, debes crearlo primero");
+            libro.setAutor(as.crearAutor());
+        }
+
         
+        //SETEO DE LA EDITORIAL
         System.out.println("Nombre completo de la editorial");
         String nombreEditorialBuscada = leer.next();
-        
         ArrayList<Editorial> listaEditorial = es.traerListaEditorial(); //Carga todas las editoriales de la BD
-        
-        for (Editorial aux2 : listaEditorial) { //OJO CON ERRORES POR REVISAR
+        flag = true;
+        for (Editorial aux2 : listaEditorial) { 
             //Editorial existe en la BD
             if (nombreEditorialBuscada.equalsIgnoreCase(aux2.getNombre())) {
                 libro.setEditorial(aux2);
-            } else{
-                libro.setEditorial(es.crearEditorial());
-            }
+                flag = false;
+                break;
+            } 
         }
-        
+        if (flag == true) {
+            System.out.println("La editorial no existe en la base de datos, debes crearla primero");
+            libro.setEditorial(es.crearEditorial());
+        }
+
         return libro;
     }
 
@@ -79,57 +86,54 @@ public class LibroService {
         ljc.create(registrarDatos());
         System.out.println("Libro registrado exitosamente");
     }
-    
-    public void eliminarLibro(){
-       System.out.println("Estos son los libros registrados en la base de datos: ");
-            System.out.println(traerListaLibros());
-            System.out.println("");
-            System.out.println("Ingresa el ID del libro que deseas eliminar");
-            Long idElimina = leer.nextLong();
+
+    public void eliminarLibro() {
+        System.out.println("Estos son los libros registrados en la base de datos: ");
+        System.out.println(traerListaLibros());
+        System.out.println("");
+        System.out.println("Ingresa el ID del libro que deseas eliminar");
+        Long idElimina = leer.nextLong();
         try {
             ljc.destroy(idElimina);
         } catch (NonexistentEntityException ex) {
             Logger.getLogger(LibroService.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public Libro traerLibro(){ 
+
+    public Libro traerLibro() {
         System.out.println("Ingresa el número del ISBN del libro"); // SE DEBEN ESTABLECER LAS EXEPCIONES
         Long id = leer.nextLong();
-        return ljc.findLibro(id); 
+        return ljc.findLibro(id);
     }
-    
-    public ArrayList<Libro> traerLibroPorTitulo(){
+
+    public ArrayList<Libro> traerLibroPorTitulo() {
         System.out.println("Título del libro que desea buscar");
         String titulo = leer.next();
-        List<Libro> listaLibro = ljc.findLibroByTitulo(titulo);        
+        List<Libro> listaLibro = ljc.findLibroByTitulo(titulo);
         ArrayList<Libro> arrayLibro = new ArrayList<>(listaLibro);
         return arrayLibro;
     }
-    
-    
-    
-    public ArrayList<Libro> traerListaLibros(){
+
+    public ArrayList<Libro> traerListaLibros() {
         List<Libro> listaLibros = ljc.findLibroEntities();
         ArrayList<Libro> arrayLibros = new ArrayList<>(listaLibros);
         return arrayLibros;
     }
 
-    public ArrayList<Libro> traerLibroPorNombreAutor() {  
+    public ArrayList<Libro> traerLibroPorNombreAutor() {
         System.out.println("Ingresa el nombre del autor del libro");
         String nombreAutor = leer.next();
         List<Libro> listaLibros = ljc.findLibrosByAutorName(nombreAutor);
         ArrayList<Libro> arrayLibros = new ArrayList<>(listaLibros);
         return arrayLibros;
     }
-    
-     public ArrayList<Libro> traerLibroPorNombreEditorial() {  
+
+    public ArrayList<Libro> traerLibroPorNombreEditorial() {
         System.out.println("Ingresa el nombre de la Editorial del libro");
         String nombreEditorial = leer.next();
         List<Libro> listaLibros = ljc.findLibrosByEditorialName(nombreEditorial);
         ArrayList<Libro> arrayLibros = new ArrayList<>(listaLibros);
         return arrayLibros;
     }
-    
-    
+
 }

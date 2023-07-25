@@ -51,7 +51,7 @@ public class MenuLibreria {
                             System.out.println("-----------------------------------");
                             break;
                         case 3:
-                            ls.crearLibro(); //OJO CON ERRORES POR REVISAR
+                            ls.crearLibro(); 
                             System.out.println("-----------------------------------");
                             break;
                         default:
