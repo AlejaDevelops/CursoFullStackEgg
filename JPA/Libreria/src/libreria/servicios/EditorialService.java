@@ -41,11 +41,13 @@ public class EditorialService {
     
      public void eliminarEditorial(){
        System.out.println("Estos son las editoriales registradas en la base de datos: ");
-            //listar editoriales registradas en la BD
+            System.out.println(traerListaEditorial().toString());
+            System.out.println("                   ***                           ");
             System.out.println("Ingresa el ID de la editorial que deseas eliminar");
             Integer idEliminar = leer.nextInt();
         try {
             ejc.destroy(idEliminar);
+            System.out.println("Editorial eliminada exitosamente");
         } catch (NonexistentEntityException ex) {
             Logger.getLogger(EditorialService.class.getName()).log(Level.SEVERE, null, ex);
         }        
@@ -67,7 +69,8 @@ public class EditorialService {
         System.out.println("Ingresa el ID de la editorial que deseas editar");
         int id = leer.nextInt();
         Editorial editorial = ejc.findEditorial(id);
-        
+        System.out.println("Esta es la editorial que vas a editar: " + editorial);
+        System.out.println("                   ***                           ");
         if (editorial!= null) {
             System.out.println("Ingresa el nuevo nombre de la editorial");
             editorial.setNombre(leer.next());

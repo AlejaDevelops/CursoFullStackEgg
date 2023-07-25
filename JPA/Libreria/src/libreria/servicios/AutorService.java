@@ -45,9 +45,11 @@ public class AutorService {
         try {
             System.out.println("Estos son los autores registrados en la base de datos: ");
             System.out.println(traerListaAutores().toString());
+            System.out.println("                   ***                           ");
             System.out.println("Ingresa el ID del autor que deseas eliminar");
             int idEliminar = leer.nextInt();
             ajc.destroy(idEliminar);
+            System.out.println("Autor eliminado exitosamente");
         } catch (NonexistentEntityException ex) {
             Logger.getLogger(AutorService.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -76,6 +78,8 @@ public class AutorService {
         System.out.println("Ingresa el ID del autor que deseas editar");
         int id = leer.nextInt();
         Autor autor = ajc.findAutor(id);
+        System.out.println("Este es el autor que vas a editar: "+autor);
+        System.out.println("                   ***                           ");
         
         if (autor!= null) {
             System.out.println("Ingresa el nuevo nombre del Autor");

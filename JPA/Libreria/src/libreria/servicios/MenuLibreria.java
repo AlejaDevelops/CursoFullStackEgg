@@ -7,13 +7,12 @@ package libreria.servicios;
 
 import java.util.Scanner;
 
-
 /**
  *
  * @author AlejaDevelops
  */
-public class MenuLibreria {    
-    
+public class MenuLibreria {
+
     AutorService as = new AutorService();
     EditorialService es = new EditorialService();
     LibroService ls = new LibroService();
@@ -32,17 +31,17 @@ public class MenuLibreria {
                     + "\n 5 - Ver registros"
                     + "\n 6- Salir");
             input = leer.nextInt(); /////////////SE DEBE CREAR UNA EXCEPCIÓN PARA LA ENTRADA DE DATOS DISTINTOS A INT
-            
+
             if (input == 6) {
                 System.out.println("Adios!");
                 break;
             }
             int input2 = eleccionDeRegistro();
-            
+
             switch (input) {
                 case 1: //REGISTRAR UNA NUEVA ENTRADA
                     switch (input2) {
-                        case 1:                                                       
+                        case 1:
                             as.crearAutor();
                             System.out.println("-----------------------------------");
                             break;
@@ -51,14 +50,14 @@ public class MenuLibreria {
                             System.out.println("-----------------------------------");
                             break;
                         case 3:
-                            ls.crearLibro(); 
+                            ls.crearLibro();
                             System.out.println("-----------------------------------");
                             break;
                         default:
                             System.out.println("Opción inválida");
                     }
                     break;
-                    
+
                 case 2: //ELIMINAR UN REGISTRO  
                     switch (input2) {
                         case 1:
@@ -77,9 +76,8 @@ public class MenuLibreria {
                             System.out.println("Opción inválida");
                     }
                     break;
-                    
-                case 3: //MODIFICAR UN REGISTRO
-                    
+
+                case 3: //MODIFICAR UN REGISTRO                    
                     switch (input2) {
                         case 1:
                             as.editarAutor();
@@ -90,7 +88,28 @@ public class MenuLibreria {
                             System.out.println("-----------------------------------");
                             break;
                         case 3:
-                            //modificar libro
+                            System.out.println("Deseas realizar la edición de: ");
+                            int input3 = eleccionParametroLibroEdicion();
+                            switch (input3) {
+                                case 1:
+                                    break;
+                                case 2:
+                                    break;
+                                case 3:
+                                    break;
+                                case 4:
+                                    break;
+                                case 5:
+                                    break;
+                                case 6:
+                                    break;
+                                case 7:
+                                    break;
+                                case 8:
+                                    break;
+                                default:
+                                    break;
+                            }
                             System.out.println("-----------------------------------");
                             break;
                         default:
@@ -98,10 +117,10 @@ public class MenuLibreria {
                     }
                     break;
                 case 4: //BUSQUEDA
-                    
+
                     switch (input2) {
                         case 1:
-                            System.out.println(as.traerAutorPorNombre());                            
+                            System.out.println(as.traerAutorPorNombre());
                             System.out.println("-----------------------------------");
                             break;
                         case 2:
@@ -109,10 +128,11 @@ public class MenuLibreria {
                             System.out.println("-----------------------------------");
                             break;
                         case 3:
-                            int input3 = eleccionTipoDeBusquedaLibro();
-                            switch (input3){
+                            System.out.println("Deseas realizar la búsqueda por: ");
+                            int input3 = eleccionParametroLibro();
+                            switch (input3) {
                                 case 1:
-                                    System.out.println(ls.traerLibro());                                    
+                                    System.out.println(ls.traerLibro());
                                     System.out.println("-----------------------------------");
                                     break;
                                 case 2:
@@ -128,18 +148,18 @@ public class MenuLibreria {
                                     System.out.println("-----------------------------------");
                                     break;
                                 default:
-                                    System.out.println("Opción inválida"); 
+                                    System.out.println("Opción inválida");
                             }
                             break;
                         default:
                             System.out.println("Opción inválida");
                             System.out.println("-----------------------------------");
                     }
-                    break; 
+                    break;
                 case 5: // Ver registros
                     switch (input2) {
                         case 1:
-                            System.out.println(as.traerListaAutores().toString());                            
+                            System.out.println(as.traerListaAutores().toString());
                             System.out.println("-----------------------------------");
                             break;
                         case 2:
@@ -152,7 +172,7 @@ public class MenuLibreria {
                             break;
                         default:
                             System.out.println("Opción inválida");
-                    }                    
+                    }
                     break;
                 default:
                     System.out.println("Opción inválida, intenta nuevamente");
@@ -161,7 +181,6 @@ public class MenuLibreria {
         } while (input != 6);
     }
 
-    
     public int eleccionDeRegistro() {
 
         System.out.println("Escoge el tipo registro "
@@ -171,12 +190,10 @@ public class MenuLibreria {
         int input = leer.nextInt(); /////////////SE DEBE CREAR UNA EXCEPCIÓN PARA LA ENTRADA DE DATOS DISTINTOS A INT
 
         return input;
-    }   
-    
-    
-    public int eleccionTipoDeBusquedaLibro(){
-        System.out.println("Deseas realizar la búsqueda por: "
-                + "\n 1 - ISBN"
+    }
+
+    public int eleccionParametroLibro() {
+        System.out.println("1 - ISBN"
                 + "\n 2 - Título"
                 + "\n 3 - Nombre del autor"
                 + "\n 4 - Editorial");
@@ -184,17 +201,20 @@ public class MenuLibreria {
 
         return input;
     }
-    
-     public int eleccionTipoDeModificacionLibro(){
-        System.out.println("Deseas realizar la modificacion de: "
-                + "\n 1 - ISBN"
-                + "\n 2 - Título"
-                + "\n 3 - Nombre del autor"
-                + "\n 4 - Editorial");
+
+    public int eleccionParametroLibroEdicion() {
+        System.out.println(
+                "1 - Título"
+                + "\n 2 - Año"
+                + "\n 3 - Ejemplares iniciales "
+                + "\n 4 - Ejemplares prestados"
+                + "\n 5 - Ejepleares restantes"
+                + "\n 6 - Alta"
+                + "\n 7 - Autor"
+                + "\n 8 - Editorial");
         int input = leer.nextInt(); /////////////SE DEBE CREAR UNA EXCEPCIÓN PARA LA ENTRADA DE DATOS DISTINTOS A INT
 
         return input;
     }
-    
+
 }
-
