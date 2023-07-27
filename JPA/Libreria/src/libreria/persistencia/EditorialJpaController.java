@@ -3,21 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package libreria.persistencia;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
+import javax.persistence.RollbackException;
+import javax.persistence.TransactionRequiredException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import libreria.entidades.Editorial;
 import libreria.persistencia.exceptions.NonexistentEntityException;
+import org.eclipse.persistence.exceptions.TransactionException;
 
 /**
  *
@@ -28,11 +31,11 @@ public class EditorialJpaController implements Serializable {
     public EditorialJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
-    
-    public EditorialJpaController(){
+
+    public EditorialJpaController() {
         emf = Persistence.createEntityManagerFactory("LibreriaPU");
     }
-    
+
     private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
@@ -46,6 +49,16 @@ public class EditorialJpaController implements Serializable {
             em.getTransaction().begin();
             em.persist(editorial);
             em.getTransaction().commit();
+            System.out.println("Editorial registrada exitosamente");
+        } catch (RollbackException e) { //CATCH QUE SE ACTIVAN CUANDO SE INTENTA INGRESAR UNA EDITORIAL QUE YA ESTÁ EN LA BD
+            if (em != null && em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            System.out.println("Error al realizar el commit de la transacción: " + e.getMessage());
+        } catch (EntityExistsException | TransactionRequiredException | IllegalStateException e) {
+            throw e;
+        } catch (Exception e) {
+            throw e;
         } finally {
             if (em != null) {
                 em.close();
@@ -90,6 +103,7 @@ public class EditorialJpaController implements Serializable {
             }
             em.remove(editorial);
             em.getTransaction().commit();
+            System.out.println("Editorial eliminada exitosamente");
         } finally {
             if (em != null) {
                 em.close();
@@ -129,16 +143,15 @@ public class EditorialJpaController implements Serializable {
             em.close();
         }
     }
-    
-    
+
     //Método adicional para búsqueda de editorial por nombre
     public List<Editorial> findEditorialByName(String nombre) {
         EntityManager em = getEntityManager();
         try {
             TypedQuery<Editorial> query = em.createQuery("SELECT e FROM Editorial e WHERE e.nombre like :nombre", Editorial.class);
-            query.setParameter("nombre", "%"+nombre+"%");
+            query.setParameter("nombre", "%" + nombre + "%");
             List<Editorial> listaEditorial = query.getResultList();
-            return listaEditorial;       
+            return listaEditorial;
         } finally {
             em.close();
         }

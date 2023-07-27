@@ -3,11 +3,12 @@ package libreria.entidades;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 /**
  *
@@ -16,8 +17,10 @@ import javax.persistence.OneToOne;
 @Entity
 public class Libro implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long isbn;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)    
+    private Integer id; //Numero de identificación interno
+    @Column(unique = true)
+    private String isbn; //Identificador único de cada libro, es el único dato que no se podría repetir en un libro, lo debe suministrar el usuario
     @Basic
     private String titulo;
     private Integer anio;
@@ -25,16 +28,17 @@ public class Libro implements Serializable {
     private Integer ejemplaresPrestados;
     private Integer ejemplaresRestantes;
     private Boolean alta;
-    @OneToOne
+    @ManyToOne //Muchos libros - un autor
     //@JoinColumn(name = "AUTOR_ID")
     private Autor autor;
-    @OneToOne
+    @ManyToOne //Muchos libros - una editorial
     private Editorial editorial;
 
     public Libro() {
     }
 
-    public Libro(Long isbn, String titulo, Integer anio, Integer ejemplares, Integer ejemplaresPrestados, Integer ejemplaresRestantes, Boolean alta, Autor autor, Editorial editorial) {
+    public Libro(Integer id, String isbn, String titulo, Integer anio, Integer ejemplares, Integer ejemplaresPrestados, Integer ejemplaresRestantes, Boolean alta, Autor autor, Editorial editorial) {
+        this.id = id;
         this.isbn = isbn;
         this.titulo = titulo;
         this.anio = anio;
@@ -46,11 +50,19 @@ public class Libro implements Serializable {
         this.editorial = editorial;
     }
 
-    public Long getIsbn() {
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(Long isbn) {
+    public void setIsbn(String isbn) {
         this.isbn = isbn;
     }
 
@@ -118,11 +130,11 @@ public class Libro implements Serializable {
         this.editorial = editorial;
     }
 
-    
+   
 
     @Override
     public String toString() {
-        return "\n Libro{" + "ISBN: " + isbn + ", Titulo: " + titulo + ", Ejemplares: " + ejemplares + ", Ejemplares prestados: " + ejemplaresPrestados + ", Ejemplares restantes: " + ejemplaresRestantes + ", Alta: " + alta + ", Autor: " + autor.getNombre()+ ", Editorial: " + editorial.getNombre() + '}';
+        return "\n Libro{"+"ID: "+id + ", ISBN: " + isbn + ", Titulo: " + titulo + ", Ejemplares: " + ejemplares + ", Ejemplares prestados: " + ejemplaresPrestados + ", Ejemplares restantes: " + ejemplaresRestantes + ", Alta: " + alta + ", Autor: " + autor.getNombre()+ ", Editorial: " + editorial.getNombre() + '}';
     }
     
     

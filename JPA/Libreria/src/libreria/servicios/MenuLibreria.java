@@ -16,6 +16,7 @@ public class MenuLibreria {
     AutorService as = new AutorService();
     EditorialService es = new EditorialService();
     LibroService ls = new LibroService();
+    ClienteService cs = new ClienteService();
     Scanner leer = new Scanner(System.in).useDelimiter("\n");
 
     public void menu() throws Exception {
@@ -53,6 +54,10 @@ public class MenuLibreria {
                             ls.crearLibro();
                             System.out.println("-----------------------------------");
                             break;
+                        case 4:
+                            cs.crearCliente();
+                            System.out.println("-----------------------------------");
+                            break;
                         default:
                             System.out.println("Opción inválida");
                     }
@@ -70,6 +75,10 @@ public class MenuLibreria {
                             break;
                         case 3:
                             ls.eliminarLibro();
+                            System.out.println("-----------------------------------");
+                            break;
+                        case 4: 
+                            cs.eliminarCliente();
                             System.out.println("-----------------------------------");
                             break;
                         default:
@@ -92,25 +101,36 @@ public class MenuLibreria {
                             int input3 = eleccionParametroLibroEdicion();
                             switch (input3) {
                                 case 1:
+                                    ls.editarLibroPorTitulo();
                                     break;
                                 case 2:
+                                    ls.editarLibroPorAnio();
                                     break;
                                 case 3:
+                                    ls.editarLibroPorEjemplaresIniciales();
                                     break;
                                 case 4:
+                                    ls.editarLibroPorEjemplaresPrestados();
                                     break;
                                 case 5:
+                                    ls.editarLibroPorEjemplaresRestantes();
                                     break;
                                 case 6:
+                                    ls.editarLibroPorAlta();
                                     break;
                                 case 7:
+                                    ls.editarLibroPorAutor();
                                     break;
                                 case 8:
+                                    ls.editarLibroPorEditorial();
                                     break;
                                 default:
                                     break;
                             }
                             System.out.println("-----------------------------------");
+                            break;
+                        case 4:
+                            //EDITAR UN CLIENTE
                             break;
                         default:
                             System.out.println("Opción inválida");
@@ -151,6 +171,9 @@ public class MenuLibreria {
                                     System.out.println("Opción inválida");
                             }
                             break;
+                        case 4:
+                            //buscar un cliente por nombre
+                            break;
                         default:
                             System.out.println("Opción inválida");
                             System.out.println("-----------------------------------");
@@ -170,6 +193,9 @@ public class MenuLibreria {
                             System.out.println(ls.traerListaLibros().toString());
                             System.out.println("-----------------------------------");
                             break;
+                        case 4:
+                            System.out.println(cs.traerListaClientes().toString()); //OJO NO ESTÁ SACANDO LA LISTA COMPLETA
+                            break;
                         default:
                             System.out.println("Opción inválida");
                     }
@@ -178,7 +204,7 @@ public class MenuLibreria {
                     System.out.println("Opción inválida, intenta nuevamente");
                     System.out.println("-----------------------------------");
             }
-        } while (input != 6);
+        } while (input != 6 );
     }
 
     public int eleccionDeRegistro() {
@@ -186,14 +212,15 @@ public class MenuLibreria {
         System.out.println("Escoge el tipo registro "
                 + "\n 1 - Autor"
                 + "\n 2 - Editorial"
-                + "\n 3 - Libro");
+                + "\n 3 - Libro"
+                + "\n 4 - Cliente");
         int input = leer.nextInt(); /////////////SE DEBE CREAR UNA EXCEPCIÓN PARA LA ENTRADA DE DATOS DISTINTOS A INT
 
         return input;
     }
 
     public int eleccionParametroLibro() {
-        System.out.println("1 - ISBN"
+        System.out.println(" 1 - ISBN"
                 + "\n 2 - Título"
                 + "\n 3 - Nombre del autor"
                 + "\n 4 - Editorial");
@@ -203,12 +230,11 @@ public class MenuLibreria {
     }
 
     public int eleccionParametroLibroEdicion() {
-        System.out.println(
-                "1 - Título"
+        System.out.println(" 1 - Título"
                 + "\n 2 - Año"
                 + "\n 3 - Ejemplares iniciales "
                 + "\n 4 - Ejemplares prestados"
-                + "\n 5 - Ejepleares restantes"
+                + "\n 5 - Ejemplares restantes"
                 + "\n 6 - Alta"
                 + "\n 7 - Autor"
                 + "\n 8 - Editorial");

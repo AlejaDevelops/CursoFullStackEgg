@@ -6,13 +6,15 @@
 package libreria.persistencia;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
+import javax.persistence.RollbackException;
+import javax.persistence.TransactionRequiredException;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -46,6 +48,16 @@ public class LibroJpaController implements Serializable {
             em.getTransaction().begin();
             em.persist(libro);
             em.getTransaction().commit();
+            System.out.println("Libro registrado exitosamente");
+        } catch (RollbackException e) { //CATCH QUE SE ACTIVAN CUANDO SE INTENTA INGRESAR UN LIBRO QUE YA ESTÁ EN LA BD
+            if (em != null && em.getTransaction().isActive()) {
+                em.getTransaction().rollback();
+            }
+            System.out.println("Error al realizar el commit de la transacción: " + e.getMessage());
+        } catch (EntityExistsException | TransactionRequiredException | IllegalStateException e) {
+            throw e;
+        } catch (Exception e) {
+            throw e;
         } finally {
             if (em != null) {
                 em.close();
@@ -63,7 +75,7 @@ public class LibroJpaController implements Serializable {
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Long id = libro.getIsbn();
+                Integer id = libro.getId();
                 if (findLibro(id) == null) {
                     throw new NonexistentEntityException("The libro with id " + id + " no longer exists.");
                 }
@@ -76,7 +88,7 @@ public class LibroJpaController implements Serializable {
         }
     }
 
-    public void destroy(Long id) throws NonexistentEntityException {
+    public void destroy(Integer id) throws NonexistentEntityException {
         EntityManager em = null;
         try {
             em = getEntityManager();
@@ -90,6 +102,7 @@ public class LibroJpaController implements Serializable {
             }
             em.remove(libro);
             em.getTransaction().commit();
+            System.out.println("Libro eliminado exitosamente");
         } finally {
             if (em != null) {
                 em.close();
@@ -122,7 +135,7 @@ public class LibroJpaController implements Serializable {
     }
 
     //Método para búsqueda de libro por ISBN o ID
-    public Libro findLibro(Long id) {
+    public Libro findLibro(Integer id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Libro.class, id);
@@ -149,24 +162,24 @@ public class LibroJpaController implements Serializable {
         EntityManager em = getEntityManager();
         try {
             TypedQuery<Libro> query = em.createQuery("SELECT l FROM Libro l WHERE l.autor.nombre LIKE :nombreAutor", Libro.class);
-            query.setParameter("nombreAutor", "%"+nombreAutor+"%");
-            List<Libro> listaLibro = query.getResultList();           
-            
+            query.setParameter("nombreAutor", "%" + nombreAutor + "%");
+            List<Libro> listaLibro = query.getResultList();
+
             return listaLibro;
         } finally {
             em.close();
         }
 
     }
-    
+
     //Método adicional para búsqueda de libro por NOMBRE EDITORIAL
     public List<Libro> findLibrosByEditorialName(String nombreEditorial) {
         EntityManager em = getEntityManager();
         try {
             TypedQuery<Libro> query = em.createQuery("SELECT l FROM Libro l WHERE l.editorial.nombre LIKE :nombreEditorial", Libro.class);
-            query.setParameter("nombreEditorial", "%"+nombreEditorial+"%");
-            List<Libro> listaLibro = query.getResultList();           
-            
+            query.setParameter("nombreEditorial", "%" + nombreEditorial + "%");
+            List<Libro> listaLibro = query.getResultList();
+
             return listaLibro;
         } finally {
             em.close();

@@ -3,6 +3,7 @@ package libreria.entidades;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,6 +19,7 @@ public class Editorial implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
     @Basic
+    @Column(unique = true)
     private String nombre;
     private Boolean alta;
     

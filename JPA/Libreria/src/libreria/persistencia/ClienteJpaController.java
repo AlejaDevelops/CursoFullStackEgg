@@ -15,41 +15,40 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
 import javax.persistence.RollbackException;
 import javax.persistence.TransactionRequiredException;
-import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import libreria.entidades.Autor;
+import libreria.entidades.Cliente;
 import libreria.persistencia.exceptions.NonexistentEntityException;
 
 /**
  *
  * @author AlejaDevelops
  */
-public class AutorJpaController implements Serializable {
+public class ClienteJpaController implements Serializable {
 
-    public AutorJpaController(EntityManagerFactory emf) {
+    public ClienteJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
 
-    public AutorJpaController() {
+    private EntityManagerFactory emf = null;
+
+    public ClienteJpaController() {
         emf = Persistence.createEntityManagerFactory("LibreriaPU");
     }
-
-    private EntityManagerFactory emf = null;
 
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
 
-    public void create(Autor autor) {
+    public void create(Cliente cliente) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(autor);
+            em.persist(cliente);
             em.getTransaction().commit();
-            System.out.println("Autor registrado exitosamente");
-        } catch (RollbackException e) { //CATCH QUE SE ACTIVAN CUANDO SE INTENTA INGRESAR UN AUTOR QUE YA ESTÁ EN LA BD
+            System.out.println("Cliente registrado exitosamente");
+        } catch (RollbackException e) { //CATCH QUE SE ACTIVAN CUANDO SE INTENTA INGRESAR UN CLIENTE QUE YA ESTÁ EN LA BD
             if (em != null && em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
@@ -65,19 +64,19 @@ public class AutorJpaController implements Serializable {
         }
     }
 
-    public void edit(Autor autor) throws NonexistentEntityException, Exception {
+    public void edit(Cliente cliente) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            autor = em.merge(autor);
+            cliente = em.merge(cliente);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Integer id = autor.getId();
-                if (findAutor(id) == null) {
-                    throw new NonexistentEntityException("The autor with id " + id + " no longer exists.");
+                Integer id = cliente.getId();
+                if (findCliente(id) == null) {
+                    throw new NonexistentEntityException("The cliente with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -93,38 +92,39 @@ public class AutorJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Autor autor;
+            Cliente cliente;
             try {
-                autor = em.getReference(Autor.class, id);
-                autor.getId();
+                cliente = em.getReference(Cliente.class, id);
+                cliente.getId();                
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The autor with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The cliente with id " + id + " no longer exists.", enfe);
             }
-            em.remove(autor);
+            em.remove(cliente);
             em.getTransaction().commit();
-            System.out.println("Autor eliminado exitosamente");
-        } catch (NonexistentEntityException e) {
+            System.out.println("Cliente eliminado exitosamente");
+        }catch(NonexistentEntityException e){
             throw e;
-        } finally {
+        } 
+        finally {
             if (em != null) {
                 em.close();
             }
         }
     }
 
-    public List<Autor> findAutorEntities() {
-        return findAutorEntities(true, -1, -1);
+    public List<Cliente> findClienteEntities() {
+        return findClienteEntities(true, -1, -1);
     }
 
-    public List<Autor> findAutorEntities(int maxResults, int firstResult) {
-        return findAutorEntities(false, maxResults, firstResult);
+    public List<Cliente> findClienteEntities(int maxResults, int firstResult) {
+        return findClienteEntities(false, maxResults, firstResult);
     }
 
-    private List<Autor> findAutorEntities(boolean all, int maxResults, int firstResult) {
+    private List<Cliente> findClienteEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Autor.class));
+            cq.select(cq.from(Cliente.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -136,33 +136,20 @@ public class AutorJpaController implements Serializable {
         }
     }
 
-    public Autor findAutor(Integer id) {
+    public Cliente findCliente(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Autor.class, id);
+            return em.find(Cliente.class, id);
         } finally {
             em.close();
         }
     }
 
-    //Método adicional para búsqueda de autor por nombre
-    public List<Autor> findAutorByName(String nombre) {
-        EntityManager em = getEntityManager();
-        try {
-            TypedQuery<Autor> query = em.createQuery("SELECT a FROM Autor a WHERE a.nombre like :nombre", Autor.class);
-            query.setParameter("nombre", "%" + nombre + "%");
-            List<Autor> listaAutor = query.getResultList();
-            return listaAutor;
-        } finally {
-            em.close();
-        }
-    }
-
-    public int getAutorCount() {
+    public int getClienteCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Autor> rt = cq.from(Autor.class);
+            Root<Cliente> rt = cq.from(Cliente.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();
