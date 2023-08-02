@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Pagina 4 - FORMULARIOS</title>
+</head>
+<body>
+	<h1>Haz entrado a la pagina 4 de Aleja :) - TEMA: FORMULARIOS</h1>
+
+	<form action="/formulario" method="">
+		<label for="nombre">Nombre</label>
+		<input value="prueba" type="text" id="nombre"  name="nombre" required="" placeholder="Escribe tu nombre aqui">
+		<label for="password">Password</label>
+		<input type="password" id="password" required="">
+		<input type="number">
+		<input type="email">
+		<input type="color">
+		<input type="range" min="0" max="5">
+		<input type="date">
+		<input type="time">
+		<input type="button" value="BOTON">
+		<input type="radio" name="">
+		<input type="checkbox" name="">
+		<input type="file" name="">
+		<textarea></textarea><br> 
+		<p> ☝️ 👇Estos eson Cuadros de texto de tamaño editable</p>
+		<textarea readonly="">Este cuadro solo permite su lectura, por el atributo "readonly" aunque sigue prmitiendo la edición del tamaño</textarea>
+		<textarea cols="50" rows="10">Este es un "textarea" con tamaño codificado con los atributos "cols=" y "rows="</textarea><br>
+		<input type="submit"><br>
+		<button type="reset">Resetar</button>
+		<button type="button">Botón que no hace nada, se le debe definir</button>
+	</form>
+	<p>El atributo <b>"required"</b> obliga al usuario diligenciar el input (que lo tenga) para poder enviar el formulario. Nota: si de programa desde acá, es decir desde el FRONTEND, se puede hackear con facilidad desde la opción F12 y editando el código. Lo más recomendado es hacerlo desde la servidor BACKEND </p><br>
+
+	<p>Atributo label "for=XX" - input "id=XX" ayuda al usuario a diligenciar el formulario. Al clickear sobre el label, el cursor ser ubica en el input determinado por el "id"</p><br>
+	
+	<p>Atributo "name=XX" debe ir siempre acompañando al input, especificando la llave con la que se almacenarán los datos recolectados</p><br>
+
+	<p>Atributo "placeholder=XX" se utiliza para dejar un texto indicativo en input, generalmente indicando la información que el usuario debe diligenciar, este texto aparece en gris claro y desaparace una vez el usuario empieza a diligenciar el input</p><br>
+
+	<P>Cuando se trabaja desde el BACKEND se deben fijar los métodos de envío del el formulario, estos son:
+		<ul>
+			<li>Form method="encriptacion" Esta es la forma más segrura de cuidar los datos.</i>
+			<li>Form method="post" se envía al servidor. action="/formulario". No es un método seguro de envío, igual se puede acceder a los datos. </i>
+			<li>Form method="head" se envía por "la dirección electrónica"</i>
+			<li>Form method="GET" se enviarán los datos del formulario a través de la URL, para ello es muy importante que cada input esté claramente identificado con su <b>NAME</b> correspondiente. Solo se pueden usar URL de máximo 250 caracteres, por lo cual no es conveniente usar para formulario muy extensos.</li>
+		</ul>
+	 </P><br>
+
+	 <p>El input "type=Submit" enviará toda la información recolectada en el formulario. Se debe especificar a dónde deben ir esos datos: Servidor, otra web, otra app etc. Se debe especificar al inicio del "form" con el atributo "action=ubicación". NOTA: El input submit es muy limtado, puesto que no se deja editar, para ello es mejor usar un "button" y escoger los diferentes "type" como reset, para volver el formulario a sus valores iniciales, es decir borrar los datos diligenciados, "submit" enviar o "button" en cuyo caso toca aclarar su utilidad con JS.</p>
+
+	<br><br><br>
+	<a href="../diseno_web/index.html">Ir a página 1</a>
+</body>
+</html>

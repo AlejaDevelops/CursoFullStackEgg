@@ -172,7 +172,8 @@ public class MenuLibreria {
                             }
                             break;
                         case 4:
-                            //buscar un cliente por nombre
+                            System.out.println(cs.traerClientePorDocumento());
+                            System.out.println("-----------------------------------");
                             break;
                         default:
                             System.out.println("Opción inválida");
@@ -194,7 +195,7 @@ public class MenuLibreria {
                             System.out.println("-----------------------------------");
                             break;
                         case 4:
-                            System.out.println(cs.traerListaClientes().toString()); //OJO NO ESTÁ SACANDO LA LISTA COMPLETA
+                            System.out.println(cs.traerListaClientes().toString());
                             break;
                         default:
                             System.out.println("Opción inválida");

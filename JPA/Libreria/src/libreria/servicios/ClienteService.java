@@ -71,8 +71,14 @@ public class ClienteService {
 
     }
 
-    public void consultarCliente() {
-
+    public Cliente traerClientePorDocumento() {
+        try {
+            System.out.println("Ingresa el documento del cliente");
+            Long doc = leer.nextLong();
+            return cjc.findClienteByDocumento(doc);            
+        } catch (Exception e) {
+            throw e;
+        }
     }
 
     public ArrayList<Cliente> traerListaClientes() {

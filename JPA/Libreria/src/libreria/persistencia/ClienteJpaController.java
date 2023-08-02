@@ -15,6 +15,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
 import javax.persistence.RollbackException;
 import javax.persistence.TransactionRequiredException;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import libreria.entidades.Cliente;
@@ -155,6 +156,18 @@ public class ClienteJpaController implements Serializable {
             return ((Long) q.getSingleResult()).intValue();
         } finally {
             em.close();
+        }
+    }
+
+    //método para buscar cliente por documento
+    public Cliente findClienteByDocumento(Long doc) {
+        EntityManager em = getEntityManager();
+        try {
+            TypedQuery<Cliente> query = em.createQuery("SELECT c from Cliente c WHERE c.documento = :doc", Cliente.class);
+            query.setParameter("doc",doc);            
+            return query.getSingleResult();
+        } catch (Exception e) {
+            throw e;
         }
     }
 

@@ -1,0 +1,12 @@
+img{
+    width: 150px;
+    height: auto;
+}
+.parrafo{
+    color: yellow;
+}
+img:hover{
+    width: 200px;
+    height: auto;
+    transition: ease 4s;
+}
