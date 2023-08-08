@@ -1,0 +1,39 @@
+h1,
+tbody,
+.parrafo3 {
+  color: #808000;
+}
+.destacado1 {
+  font-weight: bold;
+}
+H2,
+.destacado4 {
+  color: blue;
+}
+.destacado3,
+.destacado6 {
+  text-decoration: underline;
+}
+
+table,
+td {
+  border-collapse: collapse;
+  border: 1px solid black;
+}
+thead,
+.celdaNaranja,
+.destacado2 {
+  color: #ffa500;
+}
+tfoot,
+.celdaRoja,
+.destacado3,
+.destacado1 {
+  color: red;
+}
+.destacado5 {
+  color: fuchsia;
+}
+.destacado6 {
+  color: green;
+}

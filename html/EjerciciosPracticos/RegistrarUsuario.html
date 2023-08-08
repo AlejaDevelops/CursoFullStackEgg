@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FormularioResgistro</title>
+  </head>
+  <body>
+    <h1>Registrar un usuario</h1>
+    <form action="">
+      <label for="nombre">Nombre del usuario</label><br />
+      <input
+        type="text"
+        id="nombre"
+        name="nombre"
+        required=""
+        placeholder="Escribe tu nombre aquí"
+      /><br />
+      <label for="password"></label>Contraseña del usuario<br />
+      <input type="password" id="password" required="" /><br />
+      <label for="edad">Edad del usuario</label><br />
+      <input type="number" name="edad" id="edad" /><br />
+      <label for="fechaNacimiento">Fecha de nacimiento del usuario</label><br />
+      <input type="date" /><br />
+      <label for="sexo">Sexo del usuario</label><br />
+      <input type="radio" name="opcion" id="opcion1" /><label for="hombre"
+        >Hombre</label
+      ><br />
+      <input type="radio" name="opcion" id="opcion2" /><label for="mujer"
+        >Mujer</label
+      ><br />
+      <input type="radio" name="opcion" id="opcion3" /><label
+        for="SexoIndeterminado"
+        >Prefiero no decir</label
+      ><br />
+      <label for="paisNacimiento">Pais de nacimiento del usuario</label><br />
+      <select name="opcionesPaises" id="opcionesPaises" value=" ">
+        <option value="Argentina">Argentina</option>
+        <option value="Colombia">Colombia</option>
+        <option value="Peru">Perú</option>
+        <option value="Venezuela">Venezuela</option></select
+      ><br />
+      <input type="submit" value="Enviar" />
+      <input type="reset" value="Borrar" />
+    </form>
+  </body>
+</html>
