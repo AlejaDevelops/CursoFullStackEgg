@@ -20,9 +20,8 @@ td {
   border-collapse: collapse;
   border: 1px solid black;
 }
-thead,
-.celdaNaranja,
-.destacado2 {
+
+.Naranja {
   color: #ffa500;
 }
 tfoot,
@@ -34,6 +33,7 @@ tfoot,
 .destacado5 {
   color: fuchsia;
 }
-.destacado6 {
+.destacado6 { 
   color: green;
 }
+
