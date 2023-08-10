@@ -77,7 +77,7 @@ public class MenuLibreria {
                             ls.eliminarLibro();
                             System.out.println("-----------------------------------");
                             break;
-                        case 4: 
+                        case 4:
                             cs.eliminarCliente();
                             System.out.println("-----------------------------------");
                             break;
@@ -102,27 +102,35 @@ public class MenuLibreria {
                             switch (input3) {
                                 case 1:
                                     ls.editarLibroPorTitulo();
+                                    System.out.println("-----------------------------------");
                                     break;
                                 case 2:
                                     ls.editarLibroPorAnio();
+                                    System.out.println("-----------------------------------");
                                     break;
                                 case 3:
                                     ls.editarLibroPorEjemplaresIniciales();
+                                    System.out.println("-----------------------------------");
                                     break;
                                 case 4:
                                     ls.editarLibroPorEjemplaresPrestados();
+                                    System.out.println("-----------------------------------");
                                     break;
                                 case 5:
                                     ls.editarLibroPorEjemplaresRestantes();
+                                    System.out.println("-----------------------------------");
                                     break;
                                 case 6:
                                     ls.editarLibroPorAlta();
+                                    System.out.println("-----------------------------------");
                                     break;
                                 case 7:
                                     ls.editarLibroPorAutor();
+                                    System.out.println("-----------------------------------");
                                     break;
                                 case 8:
                                     ls.editarLibroPorEditorial();
+                                    System.out.println("-----------------------------------");
                                     break;
                                 default:
                                     break;
@@ -130,7 +138,28 @@ public class MenuLibreria {
                             System.out.println("-----------------------------------");
                             break;
                         case 4:
-                            //EDITAR UN CLIENTE
+                            System.out.println("Deseas realizar la modificación de ");
+                            int input4 = eleccionParametroEdicionCliente();
+                            switch (input4) {
+                                case 1:
+                                    cs.editarDocumentoCliente();
+                                    System.out.println("-----------------------------------");
+                                    break;
+                                case 2:
+                                    cs.editarNombreCliente();
+                                    System.out.println("-----------------------------------");
+                                    break;                                    
+                                case 3:
+                                    cs.editarApellidoCliente();
+                                    System.out.println("-----------------------------------");
+                                    break;
+                                case 4:
+                                    cs.editarTelefonoCliente();
+                                    System.out.println("-----------------------------------");
+                                    break;
+                                default:
+                                    System.out.println("Opción inválida");
+                            }
                             break;
                         default:
                             System.out.println("Opción inválida");
@@ -205,7 +234,7 @@ public class MenuLibreria {
                     System.out.println("Opción inválida, intenta nuevamente");
                     System.out.println("-----------------------------------");
             }
-        } while (input != 6 );
+        } while (input != 6);
     }
 
     public int eleccionDeRegistro() {
@@ -241,6 +270,15 @@ public class MenuLibreria {
                 + "\n 8 - Editorial");
         int input = leer.nextInt(); /////////////SE DEBE CREAR UNA EXCEPCIÓN PARA LA ENTRADA DE DATOS DISTINTOS A INT
 
+        return input;
+    }
+
+    private int eleccionParametroEdicionCliente() {
+        System.out.println(" 1 - Documento"
+                + "\n 2 - Nombre"
+                + "\n 3 - Apellido"
+                + "\n 4 - Teléfono");
+        int input = leer.nextInt(); /////////////SE DEBE CREAR UNA EXCEPCIÓN PARA LA ENTRADA DE DATOS DISTINTOS A INT
         return input;
     }
 

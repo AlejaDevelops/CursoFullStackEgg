@@ -66,10 +66,7 @@ public class ClienteService {
             Logger.getLogger(AutorService.class.getName()).log(Level.SEVERE, null, ex);
         } 
     }
-
-    public void modificarCliente() {
-
-    }
+   
 
     public Cliente traerClientePorDocumento() {
         try {
@@ -85,5 +82,40 @@ public class ClienteService {
         List<Cliente> listaClientes = cjc.findClienteEntities();
         ArrayList<Cliente> arrayAutores = new ArrayList<>(listaClientes);
         return arrayAutores;
+    }
+
+    public void editarDocumentoCliente() throws Exception {
+        try {
+            System.out.println("Esta es la lista de clientes registrados");
+            System.out.println(traerListaClientes());
+            System.out.println("Ingresa el ID del cliente que deseas editar");
+            int idCliente = leer.nextInt();
+            Cliente cliente = cjc.findCliente(idCliente);
+            if (cliente != null) { //Si se cumple la condición quiere decir que el cliente si está registrado en la BD
+                System.out.println("Ingrese el nuevo documento del cliente");
+                cliente.setDocumento(leer.nextLong());
+                cjc.edit(cliente);
+                System.out.println("Documento editado exitosamente");
+            }else
+                System.out.println("El ID ingresado no se encuentra en la base de datos");
+                        
+            
+        } catch (Exception e) {
+            throw e;
+        }
+        
+        
+    }
+
+    public void editarNombreCliente() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void editarApellidoCliente() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public void editarTelefonoCliente() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
