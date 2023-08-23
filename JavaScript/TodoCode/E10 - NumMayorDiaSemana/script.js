@@ -18,7 +18,35 @@ if (n2 == n1) {
   console.log("Los números son iguales");
 }
 
-for (let index = 0; index < array.length; index++) {
-    const element = array[index];
-    
+let fecha1 = prompt("Ingresa una fecha", "mm/dd/yyyy");
+let fecha2 = new Date(fecha1);
+let dia = fecha2.getDay();
+let diaSemana;
+switch (dia) {
+  case 0:
+    diaSemana = "domingo";
+    break;
+  case 1:
+    diaSemana = "lunes";
+    break;
+  case 2:
+    diaSemana = "martes";
+    break;
+  case 3:
+    diaSemana = "miércoles";
+    break;
+  case 4:
+    diaSemana = "jueves";
+    break;
+  case 5:
+    diaSemana = "viernes";
+    break;
+  case 6:
+    diaSemana = "sábado";
+    break;
+
+  default:
+    diaSemana = "null";
+    break;
 }
+alert("El día de la semana que le corresponde a esa fecha es " + diaSemana);

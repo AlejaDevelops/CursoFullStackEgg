@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Obtener nombre y apellido de form</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <p>
+      Escriba una función de JavaScript para obtener los valores de Nombre y
+      Apellido del siguiente formulario.
+    </p>
+    <div class="container mt-5">
+      <h1 class="mb-4">Formulario</h1>
+      <form id="form1" onsubmit="return getFormValores()">
+        <label for="nombre">
+          Nombre
+          <input
+            type="text"
+            name="nombre"
+            placeholder="David"
+            value="" /></label
+        ><br />
+        <label for="apellido"
+          >Apellido
+          <input
+            type="text"
+            name="apellido"
+            placeholder="Beckham"
+            value="" /></label
+        ><br /><br />
+        <div class="contenedorBoton">
+          <input class="btn btn-primary" type="submit" value="Submit" />
+        </div>
+      </form>
+    </div>
+  </body>
+</html>
