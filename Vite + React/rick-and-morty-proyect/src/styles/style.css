@@ -1,0 +1,36 @@
+#root {
+  padding: 8rem;
+}
+
+.rotating-image:hover {
+  filter: drop-shadow(0 0 2em #ffffffaa);
+}
+
+.rickAndMorty:hover {
+  -webkit-transform: scale(1.25);
+  -moz-transform: scale(1.25);
+  -ms-transform: scale(1.25);
+  -o-transform: scale(1.25);
+  transform: scale(1.25);
+}
+.rotating-image {
+  animation: logo-spin infinite 20s linear;
+  position: absolute;
+  z-index: -1;
+}
+
+.RickAndMorty {
+  z-index: 1;
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+.nav-item {
+  margin-left: 25px;
+}
