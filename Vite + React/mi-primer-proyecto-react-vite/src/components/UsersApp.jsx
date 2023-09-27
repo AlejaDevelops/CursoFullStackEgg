@@ -30,7 +30,8 @@ export const UsersApp = () => {
       <ul>
         {users.map((user) => (
           <li key={user.id}>
-            Nombre: {user.name} Usuario: {user.username}
+            Nombre: {user.name}
+            Usuario: {user.username}
           </li>
         ))}
       </ul>
@@ -39,3 +40,5 @@ export const UsersApp = () => {
     </>
   );
 };
+
+/*TRAE UNA LISTA DE USUARIOS DESDE UNA FALSA API AL HACER CLICK EN UN BOTÓN */

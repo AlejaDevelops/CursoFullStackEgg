@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "./style.css";
-import { UsersAppTwo } from "./components/PasarParametrosComponenteNuevo/UsersAppTwo";
+import { UsersApp } from "./UsersApp";
+import "./Style/styles.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <UsersAppTwo />
+    <UsersApp />
   </React.StrictMode>
 );
