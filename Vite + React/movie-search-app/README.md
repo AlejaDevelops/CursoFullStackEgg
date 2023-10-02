@@ -1,10 +1,7 @@
-# React + Vite
+# React + Vite Practice // MovieSearch with MovieDetails
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- API: https://www.themoviedb.org/
+- Teacher: https://github.com/sergiecode
+- KeyWords: react-router-dom, fetch, json, useParams
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-- CHECK THIS WEBSITE ON: https://movie-search-alejadevelops.netlify.app/
+*** CHECK THIS WEBSITE ON: https://movie-search-alejadevelops.netlify.app/ ***
