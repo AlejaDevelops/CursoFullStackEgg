@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { Link } from "react-router-dom"
 
 export const HomeScreen = () => {
 
@@ -53,7 +54,9 @@ export const HomeScreen = () => {
                               <img src={`https://image.tmdb.org/t/p/w500${item.poster_path}`} alt={item.title} />
                               <h2>{item.title}</h2>
                               <p>{item.overview.length > 150 ? `${item.overview.slice(0, 150)}...` : item.overview}</p>
-                              <button>Ver detalle</button>
+                              <div>
+                                <Link to={`/detail/${item.id}`}>Ver más</Link>
+                              </div>
                           </div>
                       ))
                   ) : (
