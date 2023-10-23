@@ -9,8 +9,8 @@ async function registrarUsuario(){
     let datos={};
     datos.nombre= document.getElementById('txtNombre').value;
     datos.apellido= document.getElementById('txtApellido').value;
-    datos.email= document.getElementById('txtEmail').value;
     datos.password= document.getElementById('txtPassword').value;
+    datos.email= document.getElementById('txtEmail').value; //ESTA PENDIENTE QUE EXISTA UNA VALIDACION DEL CORREO EN LA BD
 
     let repetirPassword = document.getElementById('txtRepetirPassword').value;
 
@@ -27,6 +27,9 @@ async function registrarUsuario(){
         },
         body: JSON.stringify(datos)
       });
+
+      alert('Registro exitoso!');
+      location.reload();
 
 }
 

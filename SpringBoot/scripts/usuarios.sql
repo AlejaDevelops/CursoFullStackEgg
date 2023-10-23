@@ -8,7 +8,7 @@ create table  IF NOT EXISTS usuarios(
   apellido varchar(50) NOT NULL,
   email varchar(255) DEFAULT NULL,
   telefono varchar(20) DEFAULT NULL,
-  contrasena varchar(20) default NULL
+  contrasena varchar(255) default NULL
 );
 
 insert into usuarios (nombre, apellido, email, telefono, contrasena) values('Alejandra', 'Orjuela', 'orjuela.alejandrap@gmail.com', '302 5144232', '123456789');

@@ -13,8 +13,11 @@ public class AuthController {
     @Autowired
     private UsuarioDao usuarioDao;
 
+
     @RequestMapping(value = "api/login", method = RequestMethod.POST)
     public String login(@RequestBody Usuario usuario){
+
+
         if (usuarioDao.verificarCredenciales(usuario)){
             return "OK";
         }

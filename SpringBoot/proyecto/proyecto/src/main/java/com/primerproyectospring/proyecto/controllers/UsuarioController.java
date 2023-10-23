@@ -2,6 +2,8 @@ package com.primerproyectospring.proyecto.controllers;
 
 import com.primerproyectospring.proyecto.dao.UsuarioDao;
 import com.primerproyectospring.proyecto.models.Usuario;
+import de.mkammerer.argon2.Argon2;
+import de.mkammerer.argon2.Argon2Factory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
@@ -22,7 +24,6 @@ public class UsuarioController {
         usuario.setTelefono("302 5144232");
         usuario.setPassword("123456789");
 
-
         return usuario;
     }
 
@@ -33,6 +34,12 @@ public class UsuarioController {
 
     @RequestMapping(value = "api/usuarios", method = RequestMethod.POST)
     public void registrarUsuarios(@RequestBody Usuario usuario){
+
+        //Encriptacion de contraseña
+        Argon2 argon2 = Argon2Factory.create(Argon2Factory.Argon2Types.ARGON2id);
+        String hash = argon2.hash(1, 1024, 1, usuario.getPassword());
+        usuario.setPassword(hash);
+
         usuarioDao.registrar(usuario);
     }
 
